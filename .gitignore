@@ -20,4 +20,4 @@ Release
 ipch/
 obj/
 */obj
-*Web.Debug.config
+*.config
