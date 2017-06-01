@@ -23,23 +23,14 @@ namespace SpeakBot
             if (activity.Type == ActivityTypes.Message)
             {
                 ConnectorClient connector = new ConnectorClient(new Uri(activity.ServiceUrl));
-                // calculate something for us to return
-                int length = (activity.Text ?? string.Empty).Length;
-                List<string> words = new List<string>();
-                words.Add("Acer Explore Beyond LImits.");
-                words.Add("As I know, Acer is number one in the word.");
-                words.Add("JCS is the smartest person i've ever seen");
-                words.Add("Acer is Ace and r so we are the best in the word");
-                words.Add("wao I love Acer products");
-                Random random = new Random();
-                int idx = random.Next(0, words.Count);
-
-                // return our reply to the user
-                Activity reply = activity.CreateReply();
-                reply.Summary = $"You say {activity.Text} which was {length} characters";
-                reply.Speak = $"{words[idx % words.Count]} And you say {activity.Text}";
+                var reply = activity.CreateReply();
+                reply.Summary = "Hi! Try asking me things like ";
+                reply.Speak = "Hi! Try asking me things like";
+                reply.Text = "'show me the high score', 'search for the high score' or 'start a new game'";
+                reply.InputHint = InputHints.ExpectingInput;
                 await connector.Conversations.ReplyToActivityAsync(reply);
                 // return our reply to the user
+
             }
             else
             {
